@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""executing from_command_line to initialize settings module (only for local environment)"""
 import os
 import sys
 
