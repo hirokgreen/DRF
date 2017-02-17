@@ -22,7 +22,8 @@ def contact_details(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-        
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 @api_view(['GET', 'DELETE', 'PUT'])
 def contact_element(request, primary_key):
     """DELETE for delete contact of given id,\nPUT for update contact.\n(in Content box do as)\n{
@@ -42,5 +43,6 @@ def contact_element(request, primary_key):
         if serializer.is_valid():
             serializer.save()
             return Response('successfully updated', status=status.HTTP_204_NO_CONTENT) 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
-    return Response('contact are available to Delete/Update', status=status.HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    serializer = ContactSerializer(contact, many=False)    
+    return Response(serializer.data)    
